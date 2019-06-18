@@ -4,10 +4,11 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { createConnection, getRepository } from 'typeorm/browser';
 
-
 import { Author } from './entities/author';
 import { Category } from './entities/category';
 import { Post } from './entities/post';
+
+import { test } from './entities/test'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,71 +23,125 @@ interface AppProps {
 
 interface AppState {
   progress: string;
-  loadedPost: Post | null;
+  loadedTest: Post | null;
   savedPost: boolean
 }
 
 export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
-    this.state = { savedPost: false, progress: 'Post is being saved', loadedPost: null };
+    this.state = { savedPost: false, progress: 'Post is being saved', loadedTest: null };
     this.runDemo();
   }
+
+  // connect() {
+  //   return createConnection().then(connection => {
+  //       console.log('connection: 1111111111111111111' + (connection) )
+  //   }).catch(error => console.log(error));
+  // }
 
   connect() {
     return createConnection({
       type: 'react-native',
-      database: 'test',
+      database : `database.sqlite`,
+      
+      
+      // name: 'TestDB.db',
+      // location: 'Documents',
       location: 'default',
+      // createFromLocation: '~www/1TestDB.db', 여기서는 작동을 안한다. SQLite.open~~ 에서만 설정 가능 하네..
+    
       logging: ['error', 'query', 'schema'],
       // logging: false,
       synchronize: true,
-      entities: [
-        Author,
-        Category,
-        Post
-      ]
-    });
+      // entities: [
+      //   "src/entities/*.ts"
+      // ]
+      entities: [test]
+      // entities: [
+      //   Author,
+      //   Category,
+      //   Post
+      // ]
+    }).then(connection => {
+        console.log('connection: 1111111111111111111')
+        // console.log('__dirname: ' + __dirname);
+    }).catch( error => console.log(error));
   }
+
+
+  // connect() {
+  //   return createConnection({
+  //     type: 'react-native',
+  //     database: 'test.db',
+  //     location: '/data/mydbfile.sqlite',
+  //     createFromLocation : "~www/test.db",
+  //     logging: ['error', 'query', 'schema'],
+  //     // logging: false,
+  //     synchronize: true,
+  //     entities: [
+  //       Author,
+  //       Category,
+  //       Post
+  //     ]
+  //   });
+  // }
 
   async runDemo() {
     await this.connect();
+
+
+    // id: number;
+
+    // @Column()
+    // name: string;
+
+    // @Column("text")
+    // age: number;
+
+    // @Column("text")
+    // email: string;
     
-    const category1 = new Category();
-    category1.name = "TypeScript";
+    const test1 = new test();
+    test1.name = "TypeScript22";
+    test1.age = 11;
+    test1.email = "abc@abc.com";
 
-    const category2 = new Category();
-    category2.name = "Programming";
+    // const category2 = new Category();
+    // category2.name = "Programming";
 
-    const author = new Author();
-    author.name = "Person";
+    // const author = new Author();
+    // author.name = "Person";
 
-    const post = new Post();
-    post.title = "Control flow based type analysis";
-    post.text = "TypeScript 2.0 implements a control flow-based type analysis for local variables and parameters.";
-    post.categories = [category1, category2];
-    post.author = author;
+    // const post = new Post();
+    // post.title = "Control flow based type analysis";
+    // post.text = "TypeScript 2.0 implements a control flow-based type analysis for local variables and parameters.";
+    // post.categories = [category1, category2];
+    // post.author = author;
 
-    const postRepository = getRepository(Post);
-    await postRepository.save(post);
+    const testRepository = getRepository(test);
+    await testRepository.save(test1);
 
-    console.log("Post has been saved");
-    this.setState({
-      progress: "Post has been saved"
-    });
+    // console.log("Post has been saved");
+    // this.setState({
+    //   progress: "Post has been saved"
+    // });
 
-    const loadedPost = await postRepository.findOne({where: {id: post.id}, relations: ["author", "categories"]});
+    // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
+    const loadedTest = await testRepository.findOne({where: {id: test1.id}});
+    // const loadedTest = await testRepository.findOne({where: {id: 1}});
       
       
-    if (loadedPost) {
-      console.log("Post has been loaded: ", loadedPost);
+    if (loadedTest) {
+      console.log("Post has been loaded: ", loadedTest);
       this.setState({
-        loadedPost: loadedPost
+        loadedTest: loadedTest
       });
     }
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -96,7 +151,7 @@ export default class App extends Component<AppProps, AppState> {
           {this.state.progress}
         </Text>
         <Text style={styles.small}>
-          {JSON.stringify(this.state.loadedPost)}
+          {JSON.stringify(this.state.loadedTest)}
         </Text>
       </View>
     );
