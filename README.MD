@@ -40,7 +40,7 @@ SQLite 공식 페이지: https://github.com/andpor/react-native-sqlite-storage
 
 ## 요구 사항 정리 하기
 
-1. DB 연결 하기 ormconfig.js 그런데 이게 React Native 에서는 안된다
+1. DB 연결 하기 ormconfig.js 그런데 이게 (ormconfig.json) React Native 에서는 안된다, 좀더 찾아 보자. 
 2. Entity TypeORM 으로 연결 하기
 3. EntityManager 또는 Repository 로 CRUD 사용하기 : https://typeorm.io/#/working-with-entity-manager
 4. `Mapper` 를 이용해서 State 로 보내기, 다시 말해 리덕스 사가와 TypeORM 을 써서 프로젝트 전체에 라이브러리를 만들것
