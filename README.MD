@@ -36,7 +36,32 @@ new SQLitePluginPackage(),   // register SQLite Plugin here
 SQLite 공식 페이지: https://github.com/andpor/react-native-sqlite-storage 
 
 
-<!-- 1. A connection object needs to be created (or configuration can be stored in an “ormconfig.js” file. (https://typeorm.io/#/connection).
-> 2. Domain entities need to be defined as TypeOrm `@Entity(table_name)`.
-> 3. An EntityManager or Repository can be used on these entities to perform typical `CRUD` operations (https://typeorm.io/#/working-with-entity-manager)
-> 4. Typically `Mapper`s are used to transform our domain entities passed in `State` objects to Reducers. I also came across a transformer library. -->
+
+
+## 요구 사항 정리 하기
+
+1. DB 연결 하기 ormconfig.js 그런데 이게 React Native 에서는 안된다
+2. Entity TypeORM 으로 연결 하기
+3. EntityManager 또는 Repository 로 CRUD 사용하기 : https://typeorm.io/#/working-with-entity-manager
+4. `Mapper` 를 이용해서 State 로 보내기, 다시 말해 리덕스 사가와 TypeORM 을 써서 프로젝트 전체에 라이브러리를 만들것
+Mapper 는 무엇 이냐면 피닉스 프로젝트에서 repository --> dataProvider --> sqlite --> series 에 있는데
+Entity 랑 Provider 랑 엮어 준다.
+
+5. new Storage<Model1, Model2>() 이렇게 사용 할 수 있도록 하면 된다.
+
+6. 피닉스 프로젝트를 참고 하자면 해서 새로 만들자면
+7. repository-library 가 되고 추상 클래스이고 인디펜던트 하게 만들어서 Kobo와 Toilino 프로젝트에서 사용 할 수 있게
+8. dataProvider 이건 피닉스 프로젝트 참고 하자
+
+-- repository
+  -- books          엔티티
+  -- categories     엔티티
+  -- contributors   엔티티
+  -- dataProvider   여기에 interface DataProvider 인터페이스가 있네
+    DataProvider를 부연 설명을 하자면 sync(), findBooks<>(), GroupBy도 하고 remove, update, save 등등 도 하네
+
+9. `Entities` can’t live ? 왜 안된다는 거지? probably need to go in the `models-enterprise-kobo`
+10. selectors 발전 시키면 된다 Mappers 를 쓰는것 보다.
+11. 새로 만들자 KoboDataProvider TypeORM 두가지를 쓸 수 있는 `EntityManager`/`Repository`
+12. 그리고 새로운 configuration 는 reducer 와 같이 써서 `EntityManager` or `Repository` 를 사용 할 수 있게
+13. 같은 방법으로 `configureStore` in `App.tsx` ? 그런데 이게 무슨 말이냐.
