@@ -2,13 +2,15 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { createConnection, getRepository } from 'typeorm/browser';
+import { createConnection, getRepository, getManager } from 'typeorm/browser';
+
 
 import { Author } from './entities/author';
 import { Category } from './entities/category';
 import { Post } from './entities/post';
 
 import { test } from './entities/test'
+import { base } from '../ormconfig';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -32,6 +34,19 @@ export default class App extends Component<AppProps, AppState> {
     super(props);
     this.state = { savedPost: false, progress: 'Post is being saved', loadedTest: null };
     this.runDemo();
+
+    
+  }
+
+  componentDidMount() {
+    // console.log(base.entities);
+    console.log('componentDidMount');
+    console.log(JSON.stringify(base.entities) );
+
+    // const tt =  createConnection();
+    // console.log('qqqqqqq');
+    // console.log(tt);
+
   }
 
   // connect() {
@@ -40,34 +55,49 @@ export default class App extends Component<AppProps, AppState> {
   //   }).catch(error => console.log(error));
   // }
 
+  // async manager() {
+  //   console.log('#######################################');
+  //   console.log('manager'); 
+  //   console.log(this.connectionName);
+  //   console.log('#######################################');
+  //   const entityManager = getManager(this.connectionName);
+
+  //   // console.log(entityManager);
+
+  //   const testEntity = await entityManager.findOne(test, 1);
+  //   testEntity.email = 'dave@kobo.com';
+  //   await testEntity.save(test);
+
+  //   console.log('testEntity')
+  //   console.log(testEntity.email)
+  // }
+
   connect() {
     return createConnection({
-      type: 'react-native',
-      database : `database.sqlite`,
-      
-      // name: 'TestDB.db',
-      // location: 'Documents',
-      location: 'default',
+      type: base.type,
+      database: base.database,
+      location: base.location,
+      // location: 'default',
       // (SQLite 에서만 적용가능)createFromLocation: '~www/1TestDB.db', 여기서는 작동을 안한다. SQLite.open~~ 에서만 설정 가능 하네..
       // 그래서 iOS 에서는 디버깅 모드에서 DB 저장 되는 경로를 볼 수 있다. 
       // 그런데 android는 알 수가 없네.
-    
+
       logging: ['error', 'query', 'schema'],
       // logging: false,
       synchronize: true,
       // entities: [
-      //   "src/entities/*.ts"
+      //   "./entities/*.ts"
       // ]
-      entities: [test]
+      // entities: ["./entities/*.ts"],
+      entities: base.entities
       // entities: [
       //   Author,
       //   Category,
       //   Post
       // ]
     }).then(connection => {
-        console.log('connection: 1111111111111111111')
-        // console.log('__dirname: ' + __dirname);
-    }).catch( error => console.log(error));
+      console.log('connection: 1111111111111111111')
+    }).catch(error => console.log(error));
   }
 
 
@@ -91,18 +121,6 @@ export default class App extends Component<AppProps, AppState> {
   async runDemo() {
     await this.connect();
 
-
-    // id: number;
-
-    // @Column()
-    // name: string;
-
-    // @Column("text")
-    // age: number;
-
-    // @Column("text")
-    // email: string;
-    
     const test1 = new test();
     test1.name = "TypeScript22";
     test1.age = 11;
@@ -110,7 +128,7 @@ export default class App extends Component<AppProps, AppState> {
 
     // const category2 = new Category();
     // category2.name = "Programming";
-
+1
     // const author = new Author();
     // author.name = "Person";
 
@@ -120,8 +138,16 @@ export default class App extends Component<AppProps, AppState> {
     // post.categories = [category1, category2];
     // post.author = author;
 
+
+    // Repository 는 EntityManager 와 비슷한데  Repository concrete entity 의 기능이 제한 되어 있다고 한다.
+    // 그런데 무슨 소리야???
     const testRepository = getRepository(test);
     await testRepository.save(test1);
+
+    // const testRepository = getManager();
+    // await testRepository.save(test1);
+    // console.log('testRepository');
+    // console.log(testRepository)
 
     // console.log("Post has been saved");
     // this.setState({
@@ -129,10 +155,9 @@ export default class App extends Component<AppProps, AppState> {
     // });
 
     // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-    const loadedTest = await testRepository.findOne({where: {id: test1.id}});
+    const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
     // const loadedTest = await testRepository.findOne({where: {id: 1}});
-      
-      
+
     if (loadedTest) {
       console.log("Post has been loaded: ", loadedTest);
       this.setState({
