@@ -1,3 +1,7 @@
+## git code 유저 변경 하기
+
+git commit --amend --author="Author Name <ysangy@gmail.com>"
+
 ## 설치 순서
 
 
