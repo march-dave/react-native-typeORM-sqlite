@@ -136,8 +136,8 @@ export default class App extends Component<AppProps, AppState> {
     // });
 
     // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-    // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
-    const loadedTest = await testRepository.findOne({where: {id: 1}});
+    const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
+    // const loadedTest = await testRepository.findOne({where: {id: 1}});
 
 
     this.manager();
