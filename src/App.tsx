@@ -34,19 +34,12 @@ export default class App extends Component<AppProps, AppState> {
     super(props);
     this.state = { savedPost: false, progress: 'Post is being saved', loadedTest: null };
     this.runDemo();
-
-    
   }
 
   componentDidMount() {
     // console.log(base.entities);
     console.log('componentDidMount');
     console.log(JSON.stringify(base.entities) );
-
-    // const tt =  createConnection();
-    // console.log('qqqqqqq');
-    // console.log(tt);
-
   }
 
   // connect() {
@@ -55,22 +48,18 @@ export default class App extends Component<AppProps, AppState> {
   //   }).catch(error => console.log(error));
   // }
 
-  // async manager() {
-  //   console.log('#######################################');
-  //   console.log('manager'); 
-  //   console.log(this.connectionName);
-  //   console.log('#######################################');
-  //   const entityManager = getManager(this.connectionName);
+  async manager() {
+    console.log('#######################################');
+    console.log('manager');
+    console.log('#######################################');
+    const entityManager = getManager();
+    const testEntity = await entityManager.findOne(test, 1);
+    testEntity.email = 'dave@kobo.com';
+    await testEntity.save(test);
 
-  //   // console.log(entityManager);
-
-  //   const testEntity = await entityManager.findOne(test, 1);
-  //   testEntity.email = 'dave@kobo.com';
-  //   await testEntity.save(test);
-
-  //   console.log('testEntity')
-  //   console.log(testEntity.email)
-  // }
+    console.log('testEntity')
+    console.log(testEntity.email)
+  }
 
   connect() {
     return createConnection({
@@ -138,16 +127,8 @@ export default class App extends Component<AppProps, AppState> {
     // post.categories = [category1, category2];
     // post.author = author;
 
-
-    // Repository 는 EntityManager 와 비슷한데  Repository concrete entity 의 기능이 제한 되어 있다고 한다.
-    // 그런데 무슨 소리야???
     const testRepository = getRepository(test);
     await testRepository.save(test1);
-
-    // const testRepository = getManager();
-    // await testRepository.save(test1);
-    // console.log('testRepository');
-    // console.log(testRepository)
 
     // console.log("Post has been saved");
     // this.setState({
@@ -155,8 +136,11 @@ export default class App extends Component<AppProps, AppState> {
     // });
 
     // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-    const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
-    // const loadedTest = await testRepository.findOne({where: {id: 1}});
+    // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
+    const loadedTest = await testRepository.findOne({where: {id: 1}});
+
+
+    this.manager();
 
     if (loadedTest) {
       console.log("Post has been loaded: ", loadedTest);
