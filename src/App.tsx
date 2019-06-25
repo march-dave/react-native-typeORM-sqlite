@@ -130,10 +130,10 @@ export default class App extends Component<AppProps, AppState> {
     const testRepository = getRepository(test);
     await testRepository.save(test1);
 
-    // console.log("Post has been saved");
-    // this.setState({
-    //   progress: "Post has been saved"
-    // });
+    console.log("Post has been saved");
+    this.setState({
+      progress: "Post has been saved"
+    });
 
     // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
     const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
