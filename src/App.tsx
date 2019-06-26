@@ -33,7 +33,8 @@ export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = { savedPost: false, progress: 'Post is being saved', loadedTest: null };
-    this.runDemo();
+    // this.runDemo();
+    this.manager();
   }
 
   componentDidMount() {
@@ -52,13 +53,14 @@ export default class App extends Component<AppProps, AppState> {
     console.log('#######################################');
     console.log('manager');
     console.log('#######################################');
+    await this.connect();
     const entityManager = getManager();
     const testEntity = await entityManager.findOne(test, 1);
     testEntity.email = 'dave@kobo.com';
-    await testEntity.save(test);
+    await entityManager.save(testEntity);
 
-    console.log('testEntity')
-    console.log(testEntity.email)
+    // console.log('testEntity')
+    // console.log(testEntity.email)
   }
 
   connect() {
