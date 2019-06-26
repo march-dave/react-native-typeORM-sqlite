@@ -40,7 +40,7 @@ export default class App extends Component<AppProps, AppState> {
   componentDidMount() {
     // console.log(base.entities);
     console.log('componentDidMount');
-    console.log(JSON.stringify(base.entities) );
+    console.log(JSON.stringify(base.entities));
   }
 
   // connect() {
@@ -62,17 +62,16 @@ export default class App extends Component<AppProps, AppState> {
     // console.log('testEntity')
     // console.log(testEntity.email)
 
+    // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
+    // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
+    // const loadedTest = await testRepository.findOne({where: {id: 1}});
 
-      // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-      // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
-      // const loadedTest = await testRepository.findOne({where: {id: 1}});
-  
-      if (testEntity) {
-        console.log("Post has been loaded: ", JSON.stringify(testEntity) );
-        this.setState({
-          loadedTest: testEntity
-        });
-      }
+    if (testEntity) {
+      console.log("Post has been loaded: ", JSON.stringify(testEntity));
+      this.setState({
+        loadedTest: testEntity
+      });
+    }
   }
 
   connect() {
@@ -131,7 +130,7 @@ export default class App extends Component<AppProps, AppState> {
 
     // const category2 = new Category();
     // category2.name = "Programming";
-1
+    1
     // const author = new Author();
     // author.name = "Person";
 
