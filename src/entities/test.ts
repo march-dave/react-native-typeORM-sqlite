@@ -1,6 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm/browser";
+import {Entity as TypeORMEntity, Column, PrimaryGeneratedColumn} from "typeorm/browser";
 
-@Entity('test')
+@TypeORMEntity('test')
 export class test {
 
     @PrimaryGeneratedColumn()

@@ -57,6 +57,11 @@ export default class App extends Component<AppProps, AppState> {
 
     const entityManager = getManager();
     const testEntity = await entityManager.findOne(test, 10);
+    
+
+    console.log('2222222222')
+    console.log(testEntity);
+    console.log('3333333333')
 
 
 
@@ -96,7 +101,7 @@ export default class App extends Component<AppProps, AppState> {
       // entities: [
       //   "./entities/*.ts"
       // ]
-      // entities: ["./entities/*.ts"],
+      // entities: ["entities/*.ts"],
       entities: base.entities
       // entities: [
       //   Author,
@@ -105,6 +110,7 @@ export default class App extends Component<AppProps, AppState> {
       // ]
     }).then(connection => {
       console.log('connection: 1111111111111111111')
+      console.log(base.entities)
     }).catch(error => console.log(error));
   }
 

@@ -2,6 +2,9 @@
 
 git commit --amend --author="Author Name <ysangy@gmail.com>"
 
+
+## git stash 
+
 ## 설치 순서
 
 

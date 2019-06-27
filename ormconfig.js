@@ -1,4 +1,5 @@
 import { test } from './src/entities/test'
+import { User } from './src/entities/User'
 
 export const base = {
     type: 'react-native',
@@ -8,8 +9,8 @@ export const base = {
     logging: ['error', 'query', 'schema'],
     location: 'Documents',
 
-    entities: [test],
-    // entities: [ "src/entities/*.ts"], // 이런!! 이렇게 설정해선 인식을 못하네..-_-;;
+    entities: [test, User],
+    // entities: [ require("src/entities/*.ts") ], // 이런!! 이렇게 설정해선 인식을 못하네..-_-;;
     //  아래것들은 좀더 조사 해 볼것   
     //   migrations: ['src/migration/*.ts'],
     //   subscribers: ['src/subscriber/*.ts'],
