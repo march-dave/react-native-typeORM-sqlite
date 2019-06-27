@@ -54,9 +54,15 @@ export default class App extends Component<AppProps, AppState> {
     console.log('manager');
     console.log('#######################################');
     await this.connect();
+
     const entityManager = getManager();
-    const testEntity = await entityManager.findOne(test, 1);
-    testEntity.email = 'dave@kobo.com';
+    const testEntity = await entityManager.findOne(test, 10);
+
+
+
+    // const testEntity = await entityManager.findOne({ where: { id: ret.id } });
+    testEntity.name = "Dave";
+    testEntity.email = '1111dave222@kobo.com';
     await entityManager.save(testEntity);
 
     // console.log('testEntity')
