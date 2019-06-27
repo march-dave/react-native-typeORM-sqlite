@@ -2,8 +2,8 @@
 
 git commit --amend --author="Author Name <ysangy@gmail.com>"
 
-
-## git stash 
+## git stash 사용하기
+1
 
 ## 설치 순서
 
