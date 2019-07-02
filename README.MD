@@ -38,10 +38,13 @@ new SQLitePluginPackage(),   // register SQLite Plugin here
 
 ## iOS 에서 링크 하기
 
+방법 1)
 1. react-native link react-native-sqlite-storage 를 하면 된다. 그런데 추가를 요구 .tbd 하기도 하는데
 2. libsqlite3.0.tbd가 자동으로 추가가 안된다. 꼭 필요한 지 잘 모르겠는데 
 SQLite 공식 페이지: https://github.com/andpor/react-native-sqlite-storage 
 
+방법 2)
+pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
 
 
 

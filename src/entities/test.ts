@@ -15,3 +15,4 @@ export class test {
     @Column("text")
     email: string;
 }
+    
