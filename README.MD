@@ -8,7 +8,7 @@ git commit --amend --author="Author Name <ysangy@gmail.com>"
 ## 설치 순서
 
 
-## 안드로이드 에서 link 하기
+## 안드로이드 에서 link 하기 3 군데에 추가 해야 한다.(1 - 3)
 
 1. Define the react-native-maps project in android/settings.gradle:
 경로: android/settings.gradle
@@ -43,7 +43,7 @@ new SQLitePluginPackage(),   // register SQLite Plugin here
 2. libsqlite3.0.tbd가 자동으로 추가가 안된다. 꼭 필요한 지 잘 모르겠는데 
 SQLite 공식 페이지: https://github.com/andpor/react-native-sqlite-storage 
 
-방법 2)
+방법 2) Podfile 에 추가 해야 한다.
 pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
 
 
@@ -80,3 +80,33 @@ Entity 랑 Provider 랑 엮어 준다.
 11. 새로 만들자 KoboDataProvider TypeORM 두가지를 쓸 수 있는 `EntityManager`/`Repository`
 12. 그리고 새로운 configuration 는 reducer 와 같이 써서 `EntityManager` or `Repository` 를 사용 할 수 있게
 13. 같은 방법으로 `configureStore` in `App.tsx` ? 그런데 이게 무슨 말이냐.
+
+
+
+
+## 새로운 모듈을 만들기
+
+package에 이름 만들고
+{
+    "name": "@pilot/service-orientation-controls",  <-- 이것이 모듈 이름이다.
+    ...
+}
+
+모듈 인덱스에서  export { OrientationService }  <-- 이것이 코드에서 import 할 이름이다.
+
+## 새로운 코드에서 모듈 사용법
+
+import { OrientationService } from "@pilot/service-orientation-controls";
+import UIButtonIcon from "@pilot/ui-button-icon";
+
+render() {
+  return(
+    <View>
+      ...
+      <UIButtonIcon 
+        onClick={OrientationService.lockOrientationPortrait}
+        {...otherProps}
+      />
+    </View>
+  )
+}
