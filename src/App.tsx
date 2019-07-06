@@ -33,8 +33,8 @@ export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = { savedPost: false, progress: 'Post is being saved', loadedTest: null };
-    // this.runDemo();
-    this.manager();
+    this.runDemo();
+    // this.manager();
   }
 
   componentDidMount() {
@@ -56,7 +56,7 @@ export default class App extends Component<AppProps, AppState> {
     await this.connect();
 
     const entityManager = getManager();
-    const testEntity = await entityManager.findOne(test, 10);
+    const testEntity = await entityManager.findOne(test, 2);
     
 
     console.log('2222222222')
@@ -135,10 +135,10 @@ export default class App extends Component<AppProps, AppState> {
   async runDemo() {
     await this.connect();
 
-    const test1 = new test();
-    test1.name = "TypeScript22";
-    test1.age = 11;
-    test1.email = "abc@abc.com";
+    // const test1 = new test();
+    // test1.name = "TypeScript22";
+    // test1.age = 11;
+    // test1.email = "abc@abc.com";
 
     // const category2 = new Category();
     // category2.name = "Programming";
@@ -153,7 +153,7 @@ export default class App extends Component<AppProps, AppState> {
     // post.author = author;
 
     const testRepository = getRepository(test);
-    await testRepository.save(test1);
+    // await testRepository.save(test1);
 
     console.log("Post has been saved");
     this.setState({
@@ -161,11 +161,11 @@ export default class App extends Component<AppProps, AppState> {
     });
 
     // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-    const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
-    // const loadedTest = await testRepository.findOne({where: {id: 1}});
+    // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
+    const loadedTest = await testRepository.findOne({where: {id: 2}});
 
     if (loadedTest) {
-      console.log("Post has been loaded: ", loadedTest);
+      console.log("loadedTest Post has been loaded: ", loadedTest);
       this.setState({
         loadedTest: loadedTest
       });

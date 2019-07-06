@@ -92,7 +92,7 @@ package에 이름 만들고
     ...
 }
 
-모듈 인덱스에서  export { OrientationService }  <-- 이것이 코드에서 import 할 이름이다.
+모듈 인덱스에서  export { OrientationService } from "./orientation-controls"; <-- 이것이 코드에서 import 할 이름이다.
 
 ## 새로운 코드에서 모듈 사용법
 

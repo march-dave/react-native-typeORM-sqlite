@@ -4,13 +4,13 @@ import { User } from './src/entities/User'
 export const base = {
     type: 'react-native',
     //   schema: 'public',
-    database: `2database.sqlite`,
+    database: `musketeer.sqlite`,
     synchronize: true,
     logging: ['error', 'query', 'schema'],
     location: 'Documents',
 
-    entities: [test, User],
-    // entities: [ require("src/entities/*.ts") ], 
+    // entities: [test, User],
+    entities: [ "./src/entities/*.ts" ], 
     // 이런!! 이렇게 설정해선 인식을 못하네..-_-;;
     //  아래것들은 좀더 조사 해 볼것   
     //   migrations: ['src/migration/*.ts'],
