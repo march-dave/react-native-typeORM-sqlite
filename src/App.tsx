@@ -63,8 +63,6 @@ export default class App extends Component<AppProps, AppState> {
     console.log(testEntity);
     console.log('3333333333')
 
-
-
     // const testEntity = await entityManager.findOne({ where: { id: ret.id } });
     testEntity.name = "Dave";
     testEntity.email = '1111dave222@kobo.com';

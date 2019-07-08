@@ -9,8 +9,8 @@ export const base = {
     logging: ['error', 'query', 'schema'],
     location: 'Documents',
 
-    // entities: [test, User],
-    entities: [ "./src/entities/*.ts" ], 
+    entities: [test, User],
+    // entities: [ "./src/entities/*.ts", "./src/entities/*.js" ], 
     // 이런!! 이렇게 설정해선 인식을 못하네..-_-;;
     //  아래것들은 좀더 조사 해 볼것   
     //   migrations: ['src/migration/*.ts'],
