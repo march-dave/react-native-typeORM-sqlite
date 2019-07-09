@@ -11,12 +11,12 @@ import {Entity, PrimaryGeneratedColumn, Column, EntitySchema} from "typeorm/brow
 
 // }
 
-export interface Category {
+export interface ICategory {
     id: number;
     name: string;
 }
 
-export const CategoryEntity = new EntitySchema<Category>({
+export const CategoryEntity = new EntitySchema<ICategory>({
     name: "category",
     columns: {
         id: {
