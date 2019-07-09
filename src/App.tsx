@@ -5,11 +5,11 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { EntitySchema, createConnection, getRepository, getManager } from 'typeorm/browser';
 
 
-import { Author } from './entities/author';
+// import { Author } from './entities/author';
 // import { Category } from './entities/category';
-import { Post } from './entities/post';
+// import { Post } from './entities/post';
 
-import { test } from './entities/test'
+// import { test } from './entities/test'
 import { base } from '../ormconfig';
 
 
@@ -75,32 +75,32 @@ export default class App extends Component<AppProps, AppState> {
     console.log('#######################################');
     await this.connect();
 
-    const entityManager = getManager();
-    const testEntity = await entityManager.findOne(test, 2);
+    // const entityManager = getManager();
+    // const testEntity = await entityManager.findOne(test, 2);
     
 
-    console.log('2222222222')
-    console.log(testEntity);
-    console.log('3333333333')
+    // console.log('2222222222')
+    // console.log(testEntity);
+    // console.log('3333333333')
 
-    // const testEntity = await entityManager.findOne({ where: { id: ret.id } });
-    testEntity.name = "Dave";
-    testEntity.email = '1111dave222@kobo.com';
-    await entityManager.save(testEntity);
+    // // const testEntity = await entityManager.findOne({ where: { id: ret.id } });
+    // testEntity.name = "Dave";
+    // testEntity.email = '1111dave222@kobo.com';
+    // await entityManager.save(testEntity);
 
-    // console.log('testEntity')
-    // console.log(testEntity.email)
+    // // console.log('testEntity')
+    // // console.log(testEntity.email)
 
-    // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
-    // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
-    // const loadedTest = await testRepository.findOne({where: {id: 1}});
+    // // const loadedTest = await testRepository.findOne({where: {id: test1.id}, relations: ["author", "categories"]});
+    // // const loadedTest = await testRepository.findOne({ where: { id: test1.id } });
+    // // const loadedTest = await testRepository.findOne({where: {id: 1}});
 
-    if (testEntity) {
-      console.log("Post has been loaded: ", JSON.stringify(testEntity));
-      this.setState({
-        loadedTest: testEntity
-      });
-    }
+    // if (testEntity) {
+    //   console.log("Post has been loaded: ", JSON.stringify(testEntity));
+    //   this.setState({
+    //     loadedTest: testEntity
+    //   });
+    // }
   }
 
   connect() {
