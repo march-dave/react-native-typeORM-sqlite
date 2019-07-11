@@ -110,3 +110,9 @@ render() {
     </View>
   )
 }
+
+
+## iOS 시뮬레이터 경로
+
+
+/Users/xxxx/Library/Developer/CoreSimulator/Devices/xxxx6427-xxxx-xxxx-xxxx-xxxxE16F86C7/data/Containers/Data/Application/xxxxA093-xxxx-xxxx-xxxx-xxxx0D77EA65/Documents/xxxx.sqlite
