@@ -1,6 +1,6 @@
 ## git code 유저 변경 하기
 
-git commit --amend --author="Author Name <ysangy@gmail.com>"
+git commit --amend --author="Author Name <xxx@gmail.com>"
 
 ## git stash 사용하기
 1234
